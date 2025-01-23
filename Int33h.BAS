@@ -7,14 +7,14 @@ TYPE RegistersStr
  bx AS INTEGER
 END TYPE
 
-DECLARE FUNCTION LoadWrapper$ ()
+DECLARE FUNCTION LoadInt33h$ ()
 DECLARE SUB CallInt33h ()
 
 DIM SHARED Int33h AS STRING
 DIM SHARED Registers AS RegistersStr
 
  CLS
- Int33h = LoadWrapper$
+ Int33h = LoadInt33h$
 
  Registers.ax = &H1
  Registers.cx = &H0
@@ -38,7 +38,7 @@ SUB CallInt33h
  CALL ABSOLUTE(Registers, SADD(Int33h))
 END SUB
 
-FUNCTION LoadWrapper$
+FUNCTION LoadInt33h$
 DIM FileH AS INTEGER
 
  FileH = FREEFILE
@@ -50,6 +50,6 @@ DIM FileH AS INTEGER
   Int33h = INPUT$(LOF(FileH), FileH)
  CLOSE FileH
 
- LoadWrapper$ = Int33h
+ LoadInt33h$ = Int33h
 END FUNCTION
 
